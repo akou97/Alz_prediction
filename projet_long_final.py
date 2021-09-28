@@ -89,6 +89,8 @@ print("the shape of your features matrix is :",Features.shape)
 np.savez_compressed(var+'.npz', Features)
 print("Save the features : Done !")
 
+
+
 """# Visualisation des features maps"""
 
 import tensorflow as tf
@@ -124,7 +126,7 @@ var = 'pressure'
 zipo = ZipFile(var+'_augmented.zip')
 zipo.extractall()
 
-!mkdir 'featureMap/'
+#!mkdir 'featureMap/'
 
 image_size = 224
 fichier = "A_0009_0.png" 
@@ -321,13 +323,13 @@ cm = confusion_matrix(y_test, y_pred, labels=range(2))
 sns.heatmap(cm, annot=True, fmt='d')
 
 cpt = 4
-print('accuracy test %.2f  +- %.2f' %(clf1.cv_results_['mean_test_score'][cpt],
+print('Accuracy    test =  %.2f (%.2f)' %(clf1.cv_results_['mean_test_score'][cpt],
                                       clf1.cv_results_['std_test_score'][cpt]*2))
-print('specificity test %.2f  +- %.2f' %(clf1.cv_results_['mean_test_spec'][cpt],
+print('specificity test =  %.2f (%.2f)' %(clf1.cv_results_['mean_test_spec'][cpt],
                                       clf1.cv_results_['std_test_spec'][cpt]*2))
-print('sensibility test %.2f  +- %.2f' %(clf1.cv_results_['mean_test_sensib'][cpt],
+print('sensibility test =  %.2f (%.2f)' %(clf1.cv_results_['mean_test_sensib'][cpt],
                                       clf1.cv_results_['std_test_sensib'][cpt]*2))
-print('AUC test %.2f  +- %.2f' %(clf1.cv_results_['mean_test_AUC'][cpt],
+print('AUC         test =  %.2f (%.2f)' %(clf1.cv_results_['mean_test_AUC'][cpt],
                                       clf1.cv_results_['std_test_AUC'][cpt]*2))
 
 # Commented out IPython magic to ensure Python compatibility.
@@ -336,14 +338,14 @@ stds = clf1.cv_results_['std_test_score']
 i = 0
 for mean, std, params in zip(means, stds, clf1.cv_results_['params']):
     print("%d  %0.3f (+/-%0.03f) for %r"
-#           % (i,mean, std * 2, params))
+           % (i,mean, std * 2, params))
     i+=1
-print()
+#    print()
 
-!mkdir "missclassif"
-!mkdir "missclassif/"+var
-!mkdir "missclassif/"+var+"/alz"
-!mkdir "missclassif/"+var+"/control"
+# !mkdir "missclassif"
+# !mkdir "missclassif/"+var
+# !mkdir "missclassif/"+var+"/alz"
+# !mkdir "missclassif/"+var+"/control"
 
 mis_classified = idx_test[y_pred!=y_test]
 mis_classified_alz = mis_classified[mis_classified<n_alz]
@@ -447,7 +449,7 @@ stds = clf.cv_results_['std_test_score']
 i = 0
 for mean, std, params in zip(means, stds, clf.cv_results_['params']):
     print("%d  %0.3f (+/-%0.03f) for %r"
-#           % (i,mean, std * 2, params))
+               % (i,mean, std * 2, params))
     i+=1
 print()
 
@@ -486,9 +488,8 @@ stds = clf.cv_results_['std_test_score']
 i = 0
 for mean, std, params in zip(means, stds, clf.cv_results_['params']):
     print("%d  %0.3f (+/-%0.03f) for %r"
-#           % (i,mean, std * 2, params))
+          % (i,mean, std * 2, params))
     i+=1
-print()
 
 cpt = 1
 print('accuracy test %.2f  +- %.2f' %(clf.cv_results_['mean_test_score'][cpt],
